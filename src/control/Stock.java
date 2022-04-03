@@ -6,10 +6,6 @@ public class Stock extends javax.swing.JPanel {
         initComponents();
     }
 
-    public Stock(Control aThis, boolean b) {
-        initComponents();
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
