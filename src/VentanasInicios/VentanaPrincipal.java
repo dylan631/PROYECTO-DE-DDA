@@ -2,7 +2,6 @@ package VentanasInicios;
 
 import Ingreso.Proveedores;
 import control.Clientes;
-import control.Control;
 import control.Stock;
 import control.Transacciones;
 import java.awt.BorderLayout;
@@ -848,8 +847,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_transaccionesTxtMouseClicked
 
     private void rClientesTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rClientesTxtMouseClicked
-        if (activadoControl == true) {
-            DevolucionClienteForms newFrame = new DevolucionClienteForms();
+        /*if (activadoControl == true) {
+            #NombreDelPanel newFrame = new #NombreDelPanel();
             showPanel(newFrame);
 
             activadoTransaccion = false;
@@ -862,7 +861,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             stockTxt.setForeground(Color.white);
             rVentasBtn.setBackground(new Color(0,153,153));
             rVentasTxt.setForeground(Color.white);
-        }
+        }*/
     }//GEN-LAST:event_rClientesTxtMouseClicked
 
     private void rVentasTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rVentasTxtMouseClicked
