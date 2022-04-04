@@ -805,8 +805,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             
             activadoDevolucionProvee = false;
             activadoComprar = true;
-            devolucionClientesBtn.setBackground(new Color(0,153,153));
-            devolucionClientesTxt.setForeground(Color.white);
+            devolucionProveeBtn.setBackground(new Color(0,153,153));
+            devolucionProveeTxt.setForeground(Color.white);
         }
     }//GEN-LAST:event_comprarTxtMouseClicked
 
