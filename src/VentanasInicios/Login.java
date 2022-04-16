@@ -1,6 +1,6 @@
 package VentanasInicios;
 
-import dataMysql.VentasSQL;
+import dataMysql.ProductosSQL;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -293,7 +293,7 @@ public class Login extends javax.swing.JFrame {
         String contrasenia = String.valueOf(jPasswordField1.getPassword());
 
         if (usuario.equals("FISI") && contrasenia.equals("GRUPO4")) {
-            VentasSQL conectar = new VentasSQL();
+            ProductosSQL conectar = new ProductosSQL();
             conectar.conexion();
             JOptionPane.showMessageDialog(null, "Acceso concedido");
             VentanaPrincipal newFrame = new VentanaPrincipal();

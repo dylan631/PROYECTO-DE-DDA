@@ -8,49 +8,37 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class VentasSQL {
-    private static final String SQL_SELECT = "SELECT codigo, nombre, cantidad, precioUnitario, precioFinal FROM productos";
-    private static final String SQL_SELECTU = "SELECT * FROM productos WHERE codigo =?";
-    private static final String SQL_INSERT = "INSERT INTO productos(codigo, nombre, cantidad, precioUnitario, precioFinal) VALUES(?,?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE productos SET nombre = ?,  cantidad = ?, precioUnitario = ?, precioFinal = ? WHERE codigo = ?";
-    private static final String SQL_TRUNCATE = "TRUNCATE productos";
-    private static final String SQL_DELETE = "DELETE FROM productos WHERE codigo =?";
+public class ComprasSQL {
+    private static final String SQL_SELECT = "SELECT codigo, nombre, marca, cantidad, precio_venta, precio_compra FROM compras";
+    private static final String SQL_SELECTU = "SELECT * FROM compras WHERE codigo =?";
+    private static final String SQL_INSERT = "INSERT INTO compras(codigo, nombre, marca, cantidad, precio_venta, precio_compra) VALUES(?,?,?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE compras SET nombre = ?, marca = ?,  cantidad = ?, precioUnitario = ?, precioFinal = ? WHERE codigo = ?";
+    private static final String SQL_TRUNCATE = "TRUNCATE compras";
+    private static final String SQL_DELETE = "DELETE FROM compras WHERE codigo =?";
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
-    Ventas productoU = null;
+    Compras compraU = null;
     int registros = 0;
-    
-    
-    public boolean conexion(){
-        boolean respuesta=false;
-        try {
-            conn = getConnection();
-            if(conn!=null){
-                JOptionPane.showMessageDialog(null, "Conexion exitosa con la BD");
-                respuesta = true;
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"No se ha podido establecer conexion con la BD","ERROR",0);
-        }
-        return respuesta;
-    }
+  
     private static Connection cn;
     private static Statement leer;
     private static ResultSet rs1;
     
-    public static void conec_ventas(){
+    public static void conec_compras(){
         try {
             cn= Conexion.getConnection(); 
             leer = cn.createStatement();
-            rs1=leer.executeQuery("select *from ventas");//"select *from alumnos"*/
+            rs1=leer.executeQuery("select *from compras");//"select *from alumnos"*/
         } catch (SQLException e) {
         }   
     }
-    public static DefaultTableModel buscar_ventas_productos(DefaultTableModel dtm, String fecha, String codigo){
+
+
+    public static DefaultTableModel buscar_compras_productos(DefaultTableModel dtm, String fecha, String codigo){
         try {
             ResultSet rs=rs1;
-            rs.absolute(0); // mueve el cursor a la quinta fila de rs
+            rs.absolute(0); // mueve el cursor a la quinta fila de rs           
             while(rs.next()){
                 if(rs.getString(2).equals(fecha)&&rs.getString(3).equals(codigo)){
                     String [] datos = new String []{rs.getString(1), rs.getString(2), rs.getString(3),
@@ -67,12 +55,14 @@ public class VentasSQL {
         }
         return dtm;
     }
-    public static DefaultTableModel buscar_ventas__dni(DefaultTableModel dtm, String fecha, String dni){
+
+
+    public static DefaultTableModel buscar_compras__proveedor(DefaultTableModel dtm, String fecha, String proveedor){
         try {
             ResultSet rs=rs1;
             rs.absolute(0); // mueve el cursor a la quinta fila de rs
             while(rs.next()){
-                if(rs.getString(2).equals(fecha)&&rs.getString(5).equals(dni)){
+                if(rs.getString(2).equals(fecha)&&rs.getString(5).equals(proveedor)){
                     String [] datos = new String []{rs.getString(1), rs.getString(2), rs.getString(3),
                     rs.getString(4), rs.getString(5),rs.getString(6),
                     rs.getString(7), rs.getString(8)};  
@@ -87,10 +77,12 @@ public class VentasSQL {
         }
         return dtm;
     }
-    public static DefaultTableModel buscar_ventas(DefaultTableModel dtm, String fecha){
+
+
+    public static DefaultTableModel buscar_compras(DefaultTableModel dtm, String fecha){
         try {
             ResultSet rs=rs1;
-            rs.absolute(0); // mueve el cursor a la primera fila de rs
+            rs.absolute(0); // mueve el cursor a la quinta fila de rs
             while(rs.next()){
                 if(rs.getString(2).equals(fecha)){
                     String [] datos = new String []{rs.getString(1), rs.getString(2), rs.getString(3),
@@ -107,24 +99,40 @@ public class VentasSQL {
         }
         return dtm;
     }
-    public List<Ventas> seleccionar(){
-        List<Ventas> productos = new ArrayList<>();
+    
+    public boolean conexion(){
+        boolean respuesta=false;
+        try {
+            conn = getConnection();
+            if(conn!=null){
+                JOptionPane.showMessageDialog(null, "Conexion exitosa con la BD");
+                respuesta = true;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"No se ha podido establecer conexion con la BD","ERROR",0);
+        }
+        return respuesta;
+    }
+    
+    /*public List<Compras> seleccionar(){
+        List<Compras> compras = new ArrayList<>();
         try {            
             conn = getConnection(); //Genera la sesión para conectarnos con la base de datos
             stmt = conn.prepareStatement(SQL_SELECT); //Trae los datos de un tabla
             rs = stmt.executeQuery(); //Convierte los datos obtenidos en objetos
             while(rs.next()){
                 //Recolectamos datos de la base de datos
+                String nSerie = rs.getString("n_serie");
+                String fecha = rs.getString("fecha");
                 String codigo = rs.getString("codigo");
                 String nombre = rs.getString("nombre");
-                int cantidad = rs.getInt("cantidad");
-                float precioUnitario = rs.getFloat("precioUnitario");
-                float precioFinal = rs.getFloat("precioFinal");
+                String codigoProveedor = rs.getString("codigo_proveedor");
+                String codigoProveedor = rs.getString("codigo_proveedor");
                 
-                productoU = new Ventas(codigo,nombre,cantidad,precioUnitario,precioFinal);
+                compraU = new Compras(codigo,nombre,marca,cantidad,precioVenta,precioCompra);
                 
-                //Agregamos a la lista productos cada registro de productoU
-                productos.add(productoU);    
+                //Agregamos a la lista Compras cada registro de compraU
+                compras.add(compraU);    
             }                                  
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
@@ -139,18 +147,19 @@ public class VentasSQL {
                 ex.printStackTrace(System.out);
             }
         }
-        return productos;
+        return compras;
     } 
     
-    public void insertar(Ventas producto){
+    public void insertar(Compras compra){
         try {            
             conn = Conexion.getConnection(); //Se conecta              
             stmt = conn.prepareStatement(SQL_INSERT); //Se ejecuta el SQL
-            stmt.setString(1, producto.getCodigo()); // Llenar valores
-            stmt.setString(2, producto.getNombre());
-            stmt.setInt(3, producto.getCantidad());
-            stmt.setFloat(4, producto.getPrecioUnitario());
-            stmt.setFloat(5, producto.getPrecioFinal());
+            stmt.setString(1, compra.getCodigo()); // Llenar valores
+            stmt.setString(2, compra.getNombre());
+            stmt.setString(3, compra.getMarca());
+            stmt.setInt(4, compra.getCantidad());
+            stmt.setFloat(5, compra.getPrecioVenta());
+            stmt.setFloat(6, compra.getPrecioCompra());
             
             //Modifica el estado de la base de datos 
             
@@ -173,12 +182,12 @@ public class VentasSQL {
         }
     }
     
-    public boolean consultar(Ventas producto){
+    public boolean consultar(Compras compra){
         boolean buscar = true;
         try {
             conn = Conexion.getConnection(); //Se conecta
             stmt = conn.prepareStatement(SQL_SELECTU); //Se ejecuta el SQL
-            stmt.setString(1, producto.getCodigo()); // Llenar valores
+            stmt.setString(1, compra.getCodigo()); // Llenar valores
             rs = stmt.executeQuery(); //Convierte los datos obtenidos en objetos
             
             if(rs.next()){ //devuelve false si en caso no encuentra ninguna fila
@@ -186,7 +195,7 @@ public class VentasSQL {
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(VentasSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ComprasSQL.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             try {
                 close(stmt);
@@ -199,24 +208,26 @@ public class VentasSQL {
         return buscar;
     }
     
-    public Ventas consultarEliminar(Ventas producto){
+    public Compras consultarEliminar(Compras compra){
         try {
             conn = Conexion.getConnection(); //Se conecta
             stmt = conn.prepareStatement(SQL_SELECTU); //Se ejecuta el SQL
-            stmt.setString(1, producto.getNombre()); // Llenar valores
+            stmt.setString(1, compra.getCodigo()); // Llenar valores
             rs = stmt.executeQuery(); //Convierte los datos obtenidos en objetos
             
             while(rs.next()){ //devuelve false si en caso no encuentra ninguna fila
             //Recolectamos datos de la base de datos
+                String codigo = rs.getString("codigo");
                 String nombre = rs.getString("nombre");
+                String marca = rs.getString("marca");
                 int cantidad = rs.getInt("cantidad");
-                float precioUnitario = rs.getFloat("precioUnitario");
-                float precioFinal = rs.getFloat("precioFinal");
+                float precioVenta = rs.getFloat("precio_venta");
+                float precioCompra = rs.getFloat("precio_compra");
                 
-                producto = new Ventas(nombre, cantidad, precioUnitario, precioFinal);
+                compra = new Compras(codigo,nombre, marca, cantidad, precioVenta, precioCompra);
             }  
         } catch (SQLException ex) {
-            Logger.getLogger(VentasSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ComprasSQL.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             try {
                 close(stmt);
@@ -226,18 +237,19 @@ public class VentasSQL {
             }
             
         }
-        return producto;
+        return compra;
     }
     
-    public void actualizar(Ventas producto){
+    public void actualizar(Compras compra){
         try {
             conn = Conexion.getConnection(); //Se conecta
             stmt = conn.prepareStatement(SQL_UPDATE); //Se ejecuta el SQL
-            stmt.setString(1, producto.getCodigo()); // Llenar valores
-            stmt.setString(2, producto.getNombre());
-            stmt.setInt(3, producto.getCantidad());
-            stmt.setFloat(4, producto.getPrecioUnitario());
-            stmt.setFloat(5, producto.getPrecioFinal());
+             stmt.setString(1, compra.getCodigo()); // Llenar valores
+            stmt.setString(2, compra.getNombre());
+            stmt.setString(3, compra.getMarca());
+            stmt.setInt(4, compra.getCantidad());
+            stmt.setFloat(5, compra.getPrecioVenta());
+            stmt.setFloat(6, compra.getPrecioCompra());
             
             //Modifica el estado de la base de datos 
             
@@ -259,11 +271,11 @@ public class VentasSQL {
         }
     }
     
-    public void eliminar(Ventas producto){
+    public void eliminar(Compras compra){
         try {
             conn = Conexion.getConnection(); //Se conecta
             stmt = conn.prepareStatement(SQL_DELETE); //Se ejecuta el SQL
-            stmt.setString(1, producto.getCodigo());
+            stmt.setString(1, compra.getCodigo());
             
             //Modifica el estado de la base de datos 
             
@@ -315,5 +327,5 @@ public class VentasSQL {
             }
             
         }  
-    }
+    }*/
 }    

@@ -17,7 +17,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     int xMouse, yMouse;
     boolean activadoDevolucionCliente = false, activadoVentas = false, activadoSalida = false,
             activadoComprar=false,activadoIngreso=false,activadoDevolucionProvee=false,activadoControl=false,
-            activadoStock=false,activadoTransaccion=false,activadorClientes=false,activadorVentas=false;
+            activadoStock=false,activadoTransaccion=false,activadorVentas=false;
 
     public VentanaPrincipal() {
         initComponents();
@@ -49,8 +49,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         stockTxt = new javax.swing.JLabel();
         transaccionesBtn = new javax.swing.JPanel();
         transaccionesTxt = new javax.swing.JLabel();
-        rClientesBtn = new javax.swing.JPanel();
-        rClientesTxt = new javax.swing.JLabel();
         rVentasBtn = new javax.swing.JPanel();
         rVentasTxt = new javax.swing.JLabel();
 
@@ -70,7 +68,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 BGMousePressed(evt);
             }
         });
-        BG.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ingresoBtn.setBackground(new java.awt.Color(0, 153, 153));
         ingresoBtn.setPreferredSize(new java.awt.Dimension(300, 100));
@@ -115,8 +112,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(ingresoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-
-        BG.add(ingresoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 240, 100));
 
         salidasBtn.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -163,8 +158,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        BG.add(salidasBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 240, 100));
-
         controlBtn.setBackground(new java.awt.Color(0, 153, 153));
         controlBtn.setPreferredSize(new java.awt.Dimension(238, 100));
 
@@ -208,8 +201,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        BG.add(controlBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 240, 100));
-
         exitBtn.setBackground(new java.awt.Color(255, 255, 255));
 
         exitTxt.setFont(new java.awt.Font("Roboto Light", 0, 24)); // NOI18N
@@ -241,8 +232,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addComponent(exitTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
         );
 
-        BG.add(exitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
         contenedor.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout contenedorLayout = new javax.swing.GroupLayout(contenedor);
@@ -255,8 +244,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 610, Short.MAX_VALUE)
         );
-
-        BG.add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 900, 610));
 
         comprarBtn.setBackground(new java.awt.Color(60, 77, 120));
         comprarBtn.setPreferredSize(new java.awt.Dimension(238, 100));
@@ -290,8 +277,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(comprarTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        BG.add(comprarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 110, 40));
-
         devolucionProveeBtn.setBackground(new java.awt.Color(60, 77, 120));
         devolucionProveeBtn.setPreferredSize(new java.awt.Dimension(238, 100));
 
@@ -320,8 +305,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(devolucionProveeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        BG.add(devolucionProveeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 110, 40));
 
         ventasBtn.setBackground(new java.awt.Color(60, 77, 120));
         ventasBtn.setPreferredSize(new java.awt.Dimension(238, 100));
@@ -357,8 +340,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        BG.add(ventasBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, 110, 40));
-
         devolucionClientesBtn.setBackground(new java.awt.Color(60, 77, 120));
         devolucionClientesBtn.setPreferredSize(new java.awt.Dimension(238, 100));
 
@@ -393,8 +374,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        BG.add(devolucionClientesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, 110, 40));
-
         stockBtn.setBackground(new java.awt.Color(60, 77, 120));
         stockBtn.setPreferredSize(new java.awt.Dimension(238, 100));
 
@@ -419,7 +398,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         stockBtnLayout.setHorizontalGroup(
             stockBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(stockBtnLayout.createSequentialGroup()
-                .addComponent(stockTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(stockTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         stockBtnLayout.setVerticalGroup(
@@ -428,8 +407,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(stockTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-
-        BG.add(stockBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 70, 110, 40));
 
         transaccionesBtn.setBackground(new java.awt.Color(60, 77, 120));
         transaccionesBtn.setPreferredSize(new java.awt.Dimension(238, 100));
@@ -454,52 +431,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         transaccionesBtn.setLayout(transaccionesBtnLayout);
         transaccionesBtnLayout.setHorizontalGroup(
             transaccionesBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(transaccionesTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+            .addGroup(transaccionesBtnLayout.createSequentialGroup()
+                .addComponent(transaccionesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         transaccionesBtnLayout.setVerticalGroup(
             transaccionesBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, transaccionesBtnLayout.createSequentialGroup()
-                .addComponent(transaccionesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(transaccionesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        BG.add(transaccionesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 70, 130, 40));
-
-        rClientesBtn.setBackground(new java.awt.Color(60, 77, 120));
-        rClientesBtn.setPreferredSize(new java.awt.Dimension(238, 100));
-
-        rClientesTxt.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
-        rClientesTxt.setForeground(new java.awt.Color(60, 77, 120));
-        rClientesTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        rClientesTxt.setText("CLIENTES");
-        rClientesTxt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rClientesTxtMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                rClientesTxtMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                rClientesTxtMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout rClientesBtnLayout = new javax.swing.GroupLayout(rClientesBtn);
-        rClientesBtn.setLayout(rClientesBtnLayout);
-        rClientesBtnLayout.setHorizontalGroup(
-            rClientesBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(rClientesBtnLayout.createSequentialGroup()
-                .addComponent(rClientesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        rClientesBtnLayout.setVerticalGroup(
-            rClientesBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rClientesBtnLayout.createSequentialGroup()
-                .addComponent(rClientesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        BG.add(rClientesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 70, 110, 40));
 
         rVentasBtn.setBackground(new java.awt.Color(60, 77, 120));
         rVentasBtn.setPreferredSize(new java.awt.Dimension(238, 100));
@@ -525,17 +466,65 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         rVentasBtnLayout.setHorizontalGroup(
             rVentasBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rVentasBtnLayout.createSequentialGroup()
-                .addComponent(rVentasTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rVentasTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         rVentasBtnLayout.setVerticalGroup(
             rVentasBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rVentasBtnLayout.createSequentialGroup()
-                .addComponent(rVentasTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(rVentasTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        BG.add(rVentasBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 70, 110, 40));
+        javax.swing.GroupLayout BGLayout = new javax.swing.GroupLayout(BG);
+        BG.setLayout(BGLayout);
+        BGLayout.setHorizontalGroup(
+            BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(BGLayout.createSequentialGroup()
+                .addGap(240, 240, 240)
+                .addComponent(comprarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(devolucionProveeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(ventasBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(devolucionClientesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(stockBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(transaccionesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(rVentasBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(BGLayout.createSequentialGroup()
+                .addGroup(BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ingresoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(salidasBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(controlBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        BGLayout.setVerticalGroup(
+            BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BGLayout.createSequentialGroup()
+                .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addGroup(BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comprarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(devolucionProveeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ventasBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(devolucionClientesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stockBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(transaccionesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rVentasBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(BGLayout.createSequentialGroup()
+                        .addComponent(ingresoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(salidasBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(controlBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -590,6 +579,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         activadoSalida = true;
         activadoIngreso = false;
         activadoControl = false;
+        activadoVentas = false;
+        
         desactivarBotones();
         devolucionClientesBtn.setBackground(Color.white);
         devolucionClientesTxt.setForeground(new Color(0,153,153));
@@ -635,6 +626,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         activadoIngreso = true;
         activadoSalida = false;
         activadoControl = false;
+        activadoDevolucionProvee = false;
+        
         desactivarBotones();
         comprarBtn.setBackground(Color.white);
         comprarTxt.setForeground(new Color(0,153,153));
@@ -650,6 +643,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         activadoIngreso = false;
         activadoSalida = false;
         activadoControl = true;
+        activadoStock = false;
+        activadoTransaccion = false;
+
         desactivarBotones();
         rVentasBtn.setBackground(Color.white);
         rVentasTxt.setForeground(new Color(0,153,153));
@@ -657,8 +653,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         stockTxt.setForeground(Color.white);    
         transaccionesBtn.setBackground(new Color(0,153,153));
         transaccionesTxt.setForeground(Color.white);  
-        rClientesBtn.setBackground(new Color(0,153,153));
-        rClientesTxt.setForeground(Color.white);  
     }//GEN-LAST:event_controlTxtMouseClicked
 
     private void comprarTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comprarTxtMouseEntered
@@ -745,21 +739,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_transaccionesTxtMouseExited
 
-    private void rClientesTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rClientesTxtMouseEntered
-        if(activadorClientes==false && activadoControl==true){
-            rClientesBtn.setBackground(Color.white);
-            rClientesTxt.setForeground(new Color(0,153,153));
-        }
-
-    }//GEN-LAST:event_rClientesTxtMouseEntered
-
-    private void rClientesTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rClientesTxtMouseExited
-        if(activadorClientes==false && activadoControl==true){
-            rClientesBtn.setBackground(new Color(0,153,153));
-            rClientesTxt.setForeground(Color.white);
-        } 
-    }//GEN-LAST:event_rClientesTxtMouseExited
-
     private void rVentasTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rVentasTxtMouseEntered
         if(activadorVentas==false && activadoControl == true){
             rVentasBtn.setBackground(Color.white);
@@ -816,13 +795,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             showPanel(newFrame);
 
             activadoTransaccion = false;
-            activadorClientes = false;
             activadorVentas = false;
             activadoStock = true;
             transaccionesBtn.setBackground(new Color(0,153,153));
             transaccionesTxt.setForeground(Color.white);
-            rClientesBtn.setBackground(new Color(0,153,153));
-            rClientesTxt.setForeground(Color.white);
             rVentasBtn.setBackground(new Color(0,153,153));
             rVentasTxt.setForeground(Color.white);
         }
@@ -834,35 +810,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             showPanel(newFrame);
 
             activadoTransaccion = true;
-            activadorClientes = false;
             activadorVentas = false;
             activadoStock = false;
             stockBtn.setBackground(new Color(0,153,153));
             stockTxt.setForeground(Color.white);
-            rClientesBtn.setBackground(new Color(0,153,153));
-            rClientesTxt.setForeground(Color.white);
             rVentasBtn.setBackground(new Color(0,153,153));
             rVentasTxt.setForeground(Color.white);
         }
     }//GEN-LAST:event_transaccionesTxtMouseClicked
-
-    private void rClientesTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rClientesTxtMouseClicked
-        /*if (activadoControl == true) {
-            #NombreDelPanel newFrame = new #NombreDelPanel();
-            showPanel(newFrame);
-
-            activadoTransaccion = false;
-            activadorClientes = true;
-            activadorVentas = false;
-            activadoStock = false;
-            transaccionesBtn.setBackground(new Color(0,153,153));
-            transaccionesTxt.setForeground(Color.white);
-            stockBtn.setBackground(new Color(0,153,153));
-            stockTxt.setForeground(Color.white);
-            rVentasBtn.setBackground(new Color(0,153,153));
-            rVentasTxt.setForeground(Color.white);
-        }*/
-    }//GEN-LAST:event_rClientesTxtMouseClicked
 
     private void rVentasTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rVentasTxtMouseClicked
         if (activadoControl == true) {
@@ -870,15 +825,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             showPanel(newFrame);
 
             activadoTransaccion = false;
-            activadorClientes = false;
             activadorVentas = true;
             activadoStock = false;
             transaccionesBtn.setBackground(new Color(0,153,153));
             transaccionesTxt.setForeground(Color.white);
             stockBtn.setBackground(new Color(0,153,153));
             stockTxt.setForeground(Color.white);
-            rClientesBtn.setBackground(new Color(0,153,153));
-            rClientesTxt.setForeground(Color.white);
         }
     }//GEN-LAST:event_rVentasTxtMouseClicked
 
@@ -918,9 +870,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
             transaccionesBtn.setBackground(new Color(60,77,120));
             transaccionesTxt.setForeground(new Color(60,77,120));
-            
-            rClientesBtn.setBackground(new Color(60,77,120));
-            rClientesTxt.setForeground(new Color(60,77,120));
         
             rVentasBtn.setBackground(new Color(60,77,120));
             rVentasTxt.setForeground(new Color(60,77,120));            
@@ -939,9 +888,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             transaccionesBtn.setBackground(new Color(60,77,120));
             transaccionesTxt.setForeground(new Color(60,77,120));
             
-            rClientesBtn.setBackground(new Color(60,77,120));
-            rClientesTxt.setForeground(new Color(60,77,120));
-        
             rVentasBtn.setBackground(new Color(60,77,120));
             rVentasTxt.setForeground(new Color(60,77,120));      
             
@@ -977,8 +923,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel exitTxt;
     private javax.swing.JPanel ingresoBtn;
     private javax.swing.JLabel ingresoTxt;
-    private javax.swing.JPanel rClientesBtn;
-    private javax.swing.JLabel rClientesTxt;
     private javax.swing.JPanel rVentasBtn;
     private javax.swing.JLabel rVentasTxt;
     private javax.swing.JPanel salidasBtn;
