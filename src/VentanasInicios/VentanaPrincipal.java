@@ -1,5 +1,6 @@
 package VentanasInicios;
 
+import Ingreso.Devoluciones;
 import Ingreso.Proveedores;
 import control.Clientes;
 import control.Stock;
@@ -285,6 +286,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         devolucionProveeTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         devolucionProveeTxt.setText("DEVOLUCIÓN");
         devolucionProveeTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                devolucionProveeTxtMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 devolucionProveeTxtMouseEntered(evt);
             }
@@ -845,6 +849,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void controlTxtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_controlTxtMousePressed
        controlBtn.setBackground(new Color(204,204,204));
     }//GEN-LAST:event_controlTxtMousePressed
+
+    private void devolucionProveeTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_devolucionProveeTxtMouseClicked
+        if (activadoIngreso == true) {
+            Devoluciones newFrame = new Devoluciones();
+            showPanel(newFrame);
+            
+            activadoDevolucionProvee = true;
+            activadoComprar = false;
+            comprarBtn.setBackground(new Color(0,153,153));
+            comprarTxt.setForeground(Color.white);
+        }
+    }//GEN-LAST:event_devolucionProveeTxtMouseClicked
 
     public void showPanel(JPanel p) {
         p.setSize(900, 610);

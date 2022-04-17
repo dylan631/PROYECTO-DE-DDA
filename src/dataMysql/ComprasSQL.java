@@ -15,12 +15,34 @@ public class ComprasSQL {
     private static final String SQL_UPDATE = "UPDATE compras SET nombre = ?, marca = ?,  cantidad = ?, precioUnitario = ?, precioFinal = ? WHERE codigo = ?";
     private static final String SQL_TRUNCATE = "TRUNCATE compras";
     private static final String SQL_DELETE = "DELETE FROM compras WHERE codigo =?";
+    
+    String fechaCalendar;
+    String codigo;
+    String nombre;
+    String codigoprov;
+    String cant;
+    String preuni;
+    String prefin;
+
+    public ComprasSQL(String fechaCalendar, String codigo, String nombre, String codigoprov, String cant, String preuni, String prefin) {
+        this.fechaCalendar = fechaCalendar;
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.codigoprov = codigoprov;
+        this.cant = cant;
+        this.preuni = preuni;
+        this.prefin = prefin;
+    }
+    
+    public static void mostrarTabla(DefaultTableModel jtm) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
     Compras compraU = null;
     int registros = 0;
-  
+      
     private static Connection cn;
     private static Statement leer;
     private static ResultSet rs1;
@@ -98,6 +120,24 @@ public class ComprasSQL {
             System.out.println("error3");
         }
         return dtm;
+    }
+    
+    public void guardar_bd_compras(){
+        try {          
+            Connection cn = Conexion.getConnection();
+            PreparedStatement pst = cn.prepareStatement("insert into compras values(?,?,?,?,?,?,?,?)");// intruccion para la base de datos
+            pst.setString(1, "0");
+            pst.setString(2, fechaCalendar);
+            pst.setString(3, codigo);      
+            pst.setString(4, nombre); 
+            pst.setString(5, codigoprov);
+            pst.setString(6, cant);
+            pst.setString(7, preuni);
+            pst.setString(8, prefin); //.trim() quita espacios del principio y final de la cadena de caracteres
+            pst.executeUpdate();//Indica que todo lo anterior se escriba en la base de datos, se ejecute
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al contactar con la base de datos", "Advertencia", 1);
+            }
     }
     
     public boolean conexion(){

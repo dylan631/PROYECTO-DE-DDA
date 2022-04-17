@@ -54,7 +54,8 @@ public class Clientes extends javax.swing.JPanel {
     private void eventos(){
         calendario1.setCalendar(fecha_actual);
         calendario2.setCalendar(fecha_actual);
-        mostrarTabla();     
+        mostrarTabla();
+        jScrollPane2.setVisible(false);
         visible1(false);
         visible2(false);
     }
@@ -170,10 +171,20 @@ public class Clientes extends javax.swing.JPanel {
 
         txt_codigo.setEditable(false);
         txt_codigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_codigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_codigoActionPerformed(evt);
+            }
+        });
         add(txt_codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 140, 30));
 
         txt_nombre.setEditable(false);
         txt_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_nombreActionPerformed(evt);
+            }
+        });
         add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, 140, 30));
 
         txt_marca.setEditable(false);
@@ -223,6 +234,11 @@ public class Clientes extends javax.swing.JPanel {
 
     private void desplegableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desplegableActionPerformed
         int num =  desplegable.getSelectedIndex();//retorna el valor del item seleccionado     
+        if(num==0){
+            jScrollPane2.setVisible(false);
+        }else{
+            jScrollPane2.setVisible(true);
+        }
         switch(num){   
             case 0: 
                 limpiar_texto();
@@ -285,6 +301,14 @@ public class Clientes extends javax.swing.JPanel {
         txt_marca.setText(tabla_1.getValueAt(fila, 2).toString().trim());
     }//GEN-LAST:event_tabla_1MouseClicked
 
+    private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nombreActionPerformed
+
+    private void txt_codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_codigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_codigoActionPerformed
+
     public void indice_tabla1(){   
         String [] titulo = new String []{"CÓDIGO", "NOMBRE", "MARCA"};   
         dtm.setColumnIdentifiers(titulo); //Asigna los valores a la tabla
@@ -318,14 +342,12 @@ public class Clientes extends javax.swing.JPanel {
         LocalDate end = LocalDate.parse(fecha2); 
         if(start.isEqual(end)){
             ComprasSQL.buscar_compras_productos(dtm2, start.toString(), txt_codigo.getText());
-            System.out.println("La fecha es: "+start.toString());
         }else if(start.isAfter(end)){
             JOptionPane.showMessageDialog(null, "ERROR DE FECHA", "Advertencia", 1);
         }else if(start.isBefore(end)){
             List<LocalDate> totalDates = new ArrayList<>(); 
             while (!start.isAfter(end)) { 
                 ComprasSQL.buscar_compras_productos(dtm2, start.toString(), txt_codigo.getText());
-                System.out.println("La fecha es: "+start.toString());
                 totalDates.add(start);
                 start = start.plusDays(1);                 
             }      
@@ -339,14 +361,12 @@ public class Clientes extends javax.swing.JPanel {
         LocalDate end = LocalDate.parse(fecha2); 
         if(start.isEqual(end)){
             VentasSQL.buscar_ventas_productos(dtm2, start.toString(), txt_codigo.getText());
-            System.out.println("La fecha es: "+start.toString());
         }else if(start.isAfter(end)){
             JOptionPane.showMessageDialog(null, "ERROR DE FECHA", "Advertencia", 1);
         }else if(start.isBefore(end)){
             List<LocalDate> totalDates = new ArrayList<>(); 
             while (!start.isAfter(end)) { 
                 VentasSQL.buscar_ventas_productos(dtm2, start.toString(), txt_codigo.getText());
-                System.out.println("La fecha es: "+start.toString());
                 totalDates.add(start);
                 start = start.plusDays(1);                 
             }      
@@ -361,14 +381,12 @@ public class Clientes extends javax.swing.JPanel {
         System.out.println(txt_variable.getText());
         if(start.isEqual(end)){
             VentasSQL.buscar_ventas__dni(dtm2, start.toString(), txt_variable.getText());
-            System.out.println("La fecha es: "+start.toString());
         }else if(start.isAfter(end)){
             JOptionPane.showMessageDialog(null, "ERROR DE FECHA", "Advertencia", 1);
         }else if(start.isBefore(end)){
             List<LocalDate> totalDates = new ArrayList<>(); 
             while (!start.isAfter(end)) { 
                 VentasSQL.buscar_ventas__dni(dtm2, start.toString(), txt_variable.getText());
-                System.out.println("La fecha es: "+start.toString());
                 totalDates.add(start);
                 start = start.plusDays(1);                 
             }      
@@ -382,14 +400,12 @@ public class Clientes extends javax.swing.JPanel {
         LocalDate end = LocalDate.parse(fecha2);
         if(start.isEqual(end)){
             ComprasSQL.buscar_compras__proveedor(dtm2, start.toString(), txt_variable.getText());
-            System.out.println("La fecha es: "+start.toString());
         }else if(start.isAfter(end)){
             JOptionPane.showMessageDialog(null, "ERROR DE FECHA", "Advertencia", 1);
         }else if(start.isBefore(end)){
             List<LocalDate> totalDates = new ArrayList<>(); 
             while (!start.isAfter(end)) { 
                 ComprasSQL.buscar_compras__proveedor(dtm2, start.toString(), txt_variable.getText());
-                System.out.println("La fecha es: "+start.toString());
                 totalDates.add(start);
                 start = start.plusDays(1);                 
             }      
@@ -401,17 +417,14 @@ public class Clientes extends javax.swing.JPanel {
         VentasSQL.conec_ventas();
         LocalDate start = LocalDate.parse(fecha1); 
         LocalDate end = LocalDate.parse(fecha2);
-        System.out.println(txt_variable.getText());
         if(start.isEqual(end)){
             VentasSQL.buscar_ventas(dtm2, start.toString());
-            System.out.println("La fecha es: "+start.toString());
         }else if(start.isAfter(end)){
             JOptionPane.showMessageDialog(null, "ERROR DE FECHA", "Advertencia", 1);
         }else if(start.isBefore(end)){
             List<LocalDate> totalDates = new ArrayList<>(); 
             while (!start.isAfter(end)) { 
                 VentasSQL.buscar_ventas(dtm2, start.toString());
-                System.out.println("La fecha es: "+start.toString());
                 totalDates.add(start);
                 start = start.plusDays(1);                 
             }      
@@ -423,17 +436,14 @@ public class Clientes extends javax.swing.JPanel {
         ComprasSQL.conec_compras();
         LocalDate start = LocalDate.parse(fecha1); 
         LocalDate end = LocalDate.parse(fecha2);
-        System.out.println(txt_variable.getText());
         if(start.isEqual(end)){
             ComprasSQL.buscar_compras(dtm2, start.toString());
-            System.out.println("La fecha es: "+start.toString());
         }else if(start.isAfter(end)){
             JOptionPane.showMessageDialog(null, "ERROR DE FECHA", "Advertencia", 1);
         }else if(start.isBefore(end)){
             List<LocalDate> totalDates = new ArrayList<>(); 
             while (!start.isAfter(end)) { 
                 ComprasSQL.buscar_compras(dtm2, start.toString());
-                System.out.println("La fecha es: "+start.toString());
                 totalDates.add(start);
                 start = start.plusDays(1);                 
             }      

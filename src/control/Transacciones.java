@@ -1,5 +1,9 @@
 package control;
 
+import static dataMysql.Conexion.getConnection;
+import dataMysql.ObjetoTransaccion;
+import javax.swing.JOptionPane;
+
 public class Transacciones extends javax.swing.JPanel {
 
     public Transacciones(java.awt.Frame parent, boolean modal) {
@@ -15,284 +19,351 @@ public class Transacciones extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel6 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        contenedorTitulo = new javax.swing.JPanel();
+        textoTitulo = new javax.swing.JLabel();
+        labelDesde = new javax.swing.JLabel();
+        listaProductos = new javax.swing.JComboBox<>();
+        scrollTablaTransaccion = new javax.swing.JScrollPane();
+        tablaTransaccion = new javax.swing.JTable();
+        labelIngresos = new javax.swing.JLabel();
+        labelSalidas = new javax.swing.JLabel();
+        labelSaldos = new javax.swing.JLabel();
+        labelProductos = new javax.swing.JLabel();
+        botonBuscar = new javax.swing.JPanel();
+        labelBuscar = new javax.swing.JLabel();
+        fechaInicial = new com.toedter.calendar.JDateChooser();
+        fechaFinal = new com.toedter.calendar.JDateChooser();
+        labelHasta = new javax.swing.JLabel();
 
-        jLabel6.setBackground(new java.awt.Color(60, 77, 120));
-        jLabel6.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("SALDOS");
-        jLabel6.setOpaque(true);
+        jToggleButton1.setText("jToggleButton1");
 
-        jPanel4.setBackground(new java.awt.Color(60, 77, 120));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel9.setFont(new java.awt.Font("Roboto Light", 3, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("CONTROL DE INVENTARIO - KARDEX");
+        contenedorTitulo.setBackground(new java.awt.Color(60, 77, 120));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+        textoTitulo.setFont(new java.awt.Font("Roboto Light", 3, 14)); // NOI18N
+        textoTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        textoTitulo.setText("CONTROL DE INVENTARIO - KARDEX");
+
+        javax.swing.GroupLayout contenedorTituloLayout = new javax.swing.GroupLayout(contenedorTitulo);
+        contenedorTitulo.setLayout(contenedorTituloLayout);
+        contenedorTituloLayout.setHorizontalGroup(
+            contenedorTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorTituloLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(471, Short.MAX_VALUE))
+                .addComponent(textoTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        contenedorTituloLayout.setVerticalGroup(
+            contenedorTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(contenedorTituloLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
+                .addComponent(textoTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jLabel1.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
-        jLabel1.setText("Año");
+        add(contenedorTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
-        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox1ItemStateChanged(evt);
-            }
-        });
+        labelDesde.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
+        labelDesde.setText("Desde");
+        add(labelDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 40, -1));
 
-        jLabel5.setBackground(new java.awt.Color(60, 77, 120));
-        jLabel5.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("SALIDAS");
-        jLabel5.setOpaque(true);
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "2021", "2022" }));
-        jComboBox2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jComboBox2.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox2ItemStateChanged(evt);
-            }
-        });
-
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Tv", "Cafetera", "Cocina", "Licuadora", "Tablets", "Celulares" }));
-        jComboBox4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+        listaProductos.setModel(createModeloComboBox());
+        listaProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        listaProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox4ActionPerformed(evt);
+                listaProductosActionPerformed(evt);
             }
         });
+        add(listaProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, 150, -1));
 
-        jLabel2.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
-        jLabel2.setText("Mes");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaTransaccion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tablaTransaccion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"", null, null, null, null, null, null, "1000", "11.00", "11000.00"},
-                {"01/12/21", "400", "10", "4000", null, null, null, "1400", "10.71", "15000.00"},
-                {"02/12/21", null, null, null, "100", "10.71", "1071.43", "1300", "10.71", "13928.00"},
-                {null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Fecha", "Cantidad", "Valor Unitario", "Valor Total", "Cantidad", "Valor Unitario", "Valor Total", "Cantidad", "Valor Unitario", "Valor Total"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        scrollTablaTransaccion.setViewportView(tablaTransaccion);
 
-        jLabel4.setBackground(new java.awt.Color(60, 77, 120));
-        jLabel4.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("INGRESOS");
-        jLabel4.setOpaque(true);
+        add(scrollTablaTransaccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 830, 120));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        jComboBox3.setEnabled(false);
-        jComboBox3.setLightWeightPopupEnabled(false);
+        labelIngresos.setBackground(new java.awt.Color(60, 77, 120));
+        labelIngresos.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
+        labelIngresos.setForeground(new java.awt.Color(255, 255, 255));
+        labelIngresos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelIngresos.setText("INGRESOS");
+        labelIngresos.setOpaque(true);
+        add(labelIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 280, 250, 20));
 
-        jLabel8.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
-        jLabel8.setText("Productos");
+        labelSalidas.setBackground(new java.awt.Color(60, 77, 120));
+        labelSalidas.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
+        labelSalidas.setForeground(new java.awt.Color(255, 255, 255));
+        labelSalidas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelSalidas.setText("SALIDAS");
+        labelSalidas.setOpaque(true);
+        add(labelSalidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(375, 280, 246, 20));
 
-        jLabel3.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
-        jLabel3.setText("Día (Opcional)");
+        labelSaldos.setBackground(new java.awt.Color(60, 77, 120));
+        labelSaldos.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
+        labelSaldos.setForeground(new java.awt.Color(255, 255, 255));
+        labelSaldos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelSaldos.setText("SALDOS");
+        labelSaldos.setOpaque(true);
+        add(labelSaldos, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 280, 246, 20));
 
-        jPanel3.setBackground(new java.awt.Color(95, 94, 94));
-        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        labelProductos.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
+        labelProductos.setText("Productos");
+        add(labelProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 130, 68, -1));
+
+        botonBuscar.setBackground(new java.awt.Color(95, 94, 94));
+        botonBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonBuscarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel3MouseEntered(evt);
+                botonBuscarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel3MouseExited(evt);
+                botonBuscarMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel3MousePressed(evt);
+                botonBuscarMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jPanel3MouseReleased(evt);
+                botonBuscarMouseReleased(evt);
             }
         });
 
-        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel11.setFont(new java.awt.Font("Roboto Light", 1, 13)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Buscar");
-        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        labelBuscar.setBackground(new java.awt.Color(255, 255, 255));
+        labelBuscar.setFont(new java.awt.Font("Roboto Light", 1, 13)); // NOI18N
+        labelBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        labelBuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelBuscar.setText("Buscar");
+        labelBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+        javax.swing.GroupLayout botonBuscarLayout = new javax.swing.GroupLayout(botonBuscar);
+        botonBuscar.setLayout(botonBuscarLayout);
+        botonBuscarLayout.setHorizontalGroup(
+            botonBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, botonBuscarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(labelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+        botonBuscarLayout.setVerticalGroup(
+            botonBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, botonBuscarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(labelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 760, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(180, 180, 180)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(169, 169, 169)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(129, 129, 129)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(160, 160, 160)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(124, 124, 124)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(83, 83, 83)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(240, 240, 240)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(200, 200, 200)
-                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(120, 120, 120)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(140, 140, 140)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(70, 70, 70)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(40, 40, 40)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3))
-                    .addGap(5, 5, 5)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(12, 12, 12)
-                    .addComponent(jLabel8)
-                    .addGap(5, 5, 5)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(14, 14, 14)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        add(botonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, -1, -1));
+        add(fechaInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 150, -1));
+        add(fechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 150, -1));
+
+        labelHasta.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
+        labelHasta.setText("Hasta");
+        add(labelHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 40, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-        System.out.println(jComboBox1.getSelectedItem());
-        System.out.println(jComboBox2.getSelectedItem());
-        if(jComboBox2.getSelectedItem().equals("") || jComboBox1.getSelectedItem().equals(""))
-        jComboBox3.setEnabled(false);
-        else
-        jComboBox3.setEnabled(true);
-    }//GEN-LAST:event_jComboBox1ItemStateChanged
-
-    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
-        System.out.println(jComboBox1.getSelectedItem());
-        System.out.println(jComboBox2.getSelectedItem());
-        if(jComboBox2.getSelectedItem().equals("") || jComboBox1.getSelectedItem().equals(""))
-        jComboBox3.setEnabled(false);
-        else
-        jComboBox3.setEnabled(true);
-    }//GEN-LAST:event_jComboBox2ItemStateChanged
-
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+    private javax.swing.DefaultComboBoxModel createModeloComboBox(){
+        javax.swing.DefaultComboBoxModel modelo = new javax.swing.DefaultComboBoxModel<>();
+        try{
+            java.sql.Connection conexion = getConnection();
+            java.sql.Statement miStatement = conexion.createStatement();
+            java.sql.ResultSet datos = miStatement.executeQuery("SELECT DISTINCT nombre FROM productos");
+            while(datos.next()){
+                modelo.addElement(datos.getString("nombre"));
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"No se ha podido establecer conexion con la BD","ERROR",0);
+        }
+        
+        return modelo;
+    }
+    
+    private javax.swing.table.DefaultTableModel createModeloTableStock(){
+        javax.swing.table.DefaultTableModel modeloReturn = new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+            },
+            new String [] {
+                "Codigo", "Nombre", "Marca", "Cantidad", "Precio de Venta", "Precio de Compra"
+            }
+        );
+        try{
+            java.sql.Connection conexion = getConnection();
+            java.sql.Statement miStatement = conexion.createStatement();
+            java.sql.ResultSet datos = miStatement.executeQuery("SELECT * FROM productos");
+            while(datos.next()){
+                int codigoSQL = datos.getInt("codigo");
+                java.lang.String codigoJava = java.lang.String.format("%05d",codigoSQL);
+                String [] datosColumna = {codigoJava,datos.getString("nombre"),datos.getString("marca"),(String)datos.getString("cantidad"),(String)datos.getString("precio_venta"),(String)datos.getString("precio_compra")};
+                modeloReturn.addRow(datosColumna);
+                System.out.println("ARRAY");
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"No se ha podido establecer conexion con la BD","ERROR",0);
+        }
+        System.out.println("ARRAY!!!!!!!!!!!");
+        return modeloReturn;
+    }
+    
+    private java.util.ArrayList<ObjetoTransaccion> obtenerDatos(java.lang.String nombreTabla, String productoSeleccionado, String fInicial, String fFinal){
+        java.util.ArrayList<ObjetoTransaccion> obj= new java.util.ArrayList<>();
+        try{
+            java.sql.Connection conexion = getConnection();
+            java.sql.PreparedStatement miStatement = null;
+            if("compras".equals(nombreTabla))
+                miStatement = conexion.prepareStatement("SELECT fecha,cantidad_compra,precio_unitario FROM compras WHERE nombre LIKE ? AND fecha BETWEEN ? AND ?");
+            else if("ventas".equals(nombreTabla)){
+                miStatement = conexion.prepareStatement("SELECT fecha,cantidad_venta,precio_unitario FROM ventas WHERE nombre LIKE ? AND fecha BETWEEN ? AND ?");
+                System.out.println("ENTRAMOS A VENTAS");
+            }
+            String nombreSQL = "%"+productoSeleccionado+"%";
+            miStatement.setString(1, nombreSQL);
+            System.out.println(nombreSQL);
+            miStatement.setString(2, fInicial);
+            miStatement.setString(3, fFinal);
+            java.sql.ResultSet datos = miStatement.executeQuery();
+            System.out.print("First");
+            datos.first();
+            System.out.println(datos.isFirst());
+            while(datos.next()){
+                ObjetoTransaccion transaccion=null;
+                if("compras".equals(nombreTabla))
+                    transaccion = new ObjetoTransaccion(datos.getString("fecha"),Integer.parseInt(datos.getString("cantidad_compra")),Float.parseFloat(datos.getString("precio_unitario")),nombreTabla);
+                else if("ventas".equals(nombreTabla))
+                    transaccion = new ObjetoTransaccion(datos.getString("fecha"),Integer.parseInt(datos.getString("cantidad_venta")),Float.parseFloat(datos.getString("precio_unitario")),nombreTabla);
+                obj.add(transaccion);
+                System.out.println("ENTRAMOS A VENTAS0000");
+            }
+            conexion.close();
+        }catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,"No se ha podido establecer conexion con la BD","ERROR",0);
+        }
+        System.out.println("Hola");
+        return obj;
+    }
+    
+    private void listaProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaProductosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox4ActionPerformed
+    }//GEN-LAST:event_listaProductosActionPerformed
 
-    private void jPanel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseEntered
-        jPanel3.setBackground(new java.awt.Color(80,79,79));
-    }//GEN-LAST:event_jPanel3MouseEntered
+    private void botonBuscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBuscarMouseEntered
+        botonBuscar.setBackground(new java.awt.Color(80,79,79));
+    }//GEN-LAST:event_botonBuscarMouseEntered
 
-    private void jPanel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseExited
-        jPanel3.setBackground(new java.awt.Color(95,94,94));
-    }//GEN-LAST:event_jPanel3MouseExited
+    private void botonBuscarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBuscarMouseExited
+        botonBuscar.setBackground(new java.awt.Color(95,94,94));
+    }//GEN-LAST:event_botonBuscarMouseExited
 
-    private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed
-        jPanel3.setBackground(new java.awt.Color(50,49,49));
-    }//GEN-LAST:event_jPanel3MousePressed
+    private void botonBuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBuscarMousePressed
+        botonBuscar.setBackground(new java.awt.Color(50,49,49));
+    }//GEN-LAST:event_botonBuscarMousePressed
 
-    private void jPanel3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseReleased
-        jPanel3.setBackground(new java.awt.Color(80,79,79));
-    }//GEN-LAST:event_jPanel3MouseReleased
+    private void botonBuscarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBuscarMouseReleased
+        botonBuscar.setBackground(new java.awt.Color(80,79,79));
+    }//GEN-LAST:event_botonBuscarMouseReleased
 
+    private void botonBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBuscarMouseClicked
+        java.text.SimpleDateFormat dFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        String fInicial = dFormat.format(fechaInicial.getDate());
+        String fFinal = dFormat.format(fechaFinal.getDate());
+        java.lang.String productoSeleccionado = (java.lang.String)listaProductos.getSelectedItem();
+        java.lang.Double saldoTotal = 0.0;
+        int saldoCantidad = 0;
+        System.out.println(fInicial);
+        System.out.println(fFinal);
+        System.out.println(productoSeleccionado);
+        if(fInicial==null && fFinal==null && productoSeleccionado==null){
+            JOptionPane.showMessageDialog(null,"No se han llenado todos los campos","ERROR",0);
+        }
+        else{
+            try{
+                java.sql.Connection conexion = getConnection();
+                java.sql.PreparedStatement miStatement1 = conexion.prepareStatement("SELECT CAST(cantidad_compra AS UNSIGNED),CAST(cantidad_compra AS UNSIGNED)*CAST(precio_unitario AS DECIMAL(10,2)) FROM compras WHERE fecha < ?");
+                java.sql.PreparedStatement miStatement2 = conexion.prepareStatement("SELECT CAST(cantidad_venta AS UNSIGNED),CAST(cantidad_venta AS UNSIGNED)*CAST(precio_unitario AS DECIMAL(10,2)) FROM ventas WHERE fecha < ?");
+                miStatement1.setString(1, fInicial);
+                miStatement2.setString(1, fInicial);
+                java.sql.ResultSet miResulSet1 = miStatement1.executeQuery();
+                java.sql.ResultSet miResulSet2 = miStatement2.executeQuery();
+                
+                while(miResulSet1.next()){
+                    System.out.println("INICIALLLLLLL");
+                    saldoTotal += miResulSet1.getDouble(2);
+                    saldoCantidad += miResulSet1.getInt(1);
+                }
+                
+                while(miResulSet2.next()){
+                    saldoTotal -= miResulSet2.getDouble(2);
+                    saldoCantidad -= miResulSet2.getInt(1);
+                }
+            }catch(java.sql.SQLException e){
+                e.printStackTrace();
+            }
+            java.util.ArrayList<ObjetoTransaccion> salidas = obtenerDatos("ventas",productoSeleccionado,fInicial,fFinal);
+            java.util.ArrayList<ObjetoTransaccion> ingresos = obtenerDatos("compras",productoSeleccionado,fInicial,fFinal);
+            java.util.ArrayList<ObjetoTransaccion> datos = new java.util.ArrayList<>();
+            datos.addAll(ingresos);
+            datos.addAll(salidas);
+            datos.sort((o1, o2) -> o1.getFecha().compareTo(o2.getFecha()));
+            System.out.println(ingresos.size());
+            System.out.println(salidas.size());
+            System.out.println(datos.size());
+            javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tablaTransaccion.getModel();
+            Double saldoUnitario = saldoTotal/saldoCantidad;
+            String saldoUnitarioS = String.format("%.2f",saldoUnitario);
+            String saldoTotalS = String.format("%.2f",saldoTotal);
+            java.lang.String [] inicial = {"Saldo Inicial","0","0","0","0","0","0",String.valueOf(saldoCantidad),saldoUnitarioS,saldoTotalS};
+            modelo.addRow(inicial);
+            Double precioUnitarioSalida = saldoUnitario;
+            for(int i=0;i<datos.size();i++){
+                ObjetoTransaccion obj = datos.get(i);
+                String tipoTransaccion = obj.getTipoTransaccion();
+                if("compras".equals(tipoTransaccion)){
+                    Float precioTotal = obj.getCantidad()*obj.getPrecioUnitario();
+                    saldoTotal += Double.parseDouble(precioTotal.toString());
+                    saldoCantidad += obj.getCantidad();
+                    saldoUnitario = saldoTotal/saldoCantidad;
+                    java.lang.String [] datosFila = {obj.getFecha(),String.valueOf(obj.getCantidad()),String.format("%.2f",obj.getPrecioUnitario()),String.format("%.2f",precioTotal),"0","0","0",String.valueOf(saldoCantidad),String.format("%.2f",saldoUnitario),String.format("%.2f",saldoTotal)};
+                    modelo.addRow(datosFila);
+                }
+                else if("ventas".equals(tipoTransaccion)){
+                    Double precioTotal = obj.getCantidad()*precioUnitarioSalida;
+                    System.out.println("VENTASSSS");
+                    saldoTotal -= Double.parseDouble(precioTotal.toString());
+                    saldoCantidad -= obj.getCantidad();
+                    saldoUnitario = saldoTotal/saldoCantidad;
+                    java.lang.String [] datosFila = {obj.getFecha(),"0","0","0",String.valueOf(obj.getCantidad()),String.format("%.2f", precioUnitarioSalida),String.format("%.2f",precioTotal),String.valueOf(saldoCantidad),String.format("%.2f",saldoUnitario),String.format("%.2f",saldoTotal)};
+                    modelo.addRow(datosFila);
+                    precioUnitarioSalida = saldoUnitario;
+                }
+            }
+        }
+    }//GEN-LAST:event_botonBuscarMouseClicked
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JPanel botonBuscar;
+    private javax.swing.JPanel contenedorTitulo;
+    private com.toedter.calendar.JDateChooser fechaFinal;
+    private com.toedter.calendar.JDateChooser fechaInicial;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JLabel labelBuscar;
+    private javax.swing.JLabel labelDesde;
+    private javax.swing.JLabel labelHasta;
+    private javax.swing.JLabel labelIngresos;
+    private javax.swing.JLabel labelProductos;
+    private javax.swing.JLabel labelSaldos;
+    private javax.swing.JLabel labelSalidas;
+    private javax.swing.JComboBox<String> listaProductos;
+    private javax.swing.JScrollPane scrollTablaTransaccion;
+    private javax.swing.JTable tablaTransaccion;
+    private javax.swing.JLabel textoTitulo;
     // End of variables declaration//GEN-END:variables
 }
